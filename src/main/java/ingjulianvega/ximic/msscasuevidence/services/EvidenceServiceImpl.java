@@ -30,7 +30,7 @@ public class EvidenceServiceImpl implements EvidenceService {
         log.debug("get()...");
         return EvidenceList
                 .builder()
-                .genderList(evidenceMapper.diseaseEntityListToDiseaseDtoList(evidenceRepository.findAll()))
+                .genderList(evidenceMapper.diseaseEntityListToDiseaseDtoList(evidenceRepository.findAllByOrderByName()))
                 .build();
     }
 
