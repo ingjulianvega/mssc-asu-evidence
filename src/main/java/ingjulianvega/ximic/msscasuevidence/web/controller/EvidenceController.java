@@ -31,6 +31,11 @@ public class EvidenceController implements EvidenceI {
     }
 
     @Override
+    public ResponseEntity<EvidenceList> getByPatientId(UUID patientId) {
+        return new ResponseEntity<>(evidenceService.getByPatientId(patientId), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Void> create(@NotNull @Valid Evidence evidence) {
         evidenceService.create(evidence);
         return new ResponseEntity<>(HttpStatus.CREATED);

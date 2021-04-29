@@ -16,6 +16,7 @@ import java.util.UUID;
 public class EvidenceEntity extends BaseEntity {
 
     private UUID patientId;
-    private String name;
+    private UUID evidenceTypeId;
+    private UUID diseaseId;
     private String observations;
 }

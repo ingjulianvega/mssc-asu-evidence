@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EvidenceRepository extends JpaRepository<EvidenceEntity, UUID>, JpaSpecificationExecutor<EvidenceEntity> {
-    List<EvidenceEntity> findAllByOrderByName();
+    List<EvidenceEntity> findByPatientId(UUID patientId);
 }

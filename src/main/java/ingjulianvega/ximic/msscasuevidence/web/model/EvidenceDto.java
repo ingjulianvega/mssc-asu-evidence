@@ -18,7 +18,8 @@ public class EvidenceDto implements Serializable {
 
     private UUID id;
     private UUID patientId;
-    private String name;
+    private UUID evidenceTypeId;
+    private UUID diseaseId;
     private String observations;
 
 }

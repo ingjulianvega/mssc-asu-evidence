@@ -16,5 +16,5 @@ public class EvidenceList implements Serializable {
 
     static final long serialVersionUID = -8780904245399201053L;
 
-    public ArrayList<EvidenceDto> genderList;
+    public ArrayList<EvidenceDto> evidenceDtoList;
 }

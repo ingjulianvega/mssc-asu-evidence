@@ -30,7 +30,7 @@ public class EvidenceServiceImpl implements EvidenceService {
         log.debug("get()...");
         return EvidenceList
                 .builder()
-                .genderList(evidenceMapper.diseaseEntityListToDiseaseDtoList(evidenceRepository.findAllByOrderByName()))
+                .evidenceDtoList(evidenceMapper.evidendeEntityListToEvidendeDtoList(evidenceRepository.findAll()))
                 .build();
     }
 
@@ -38,21 +38,31 @@ public class EvidenceServiceImpl implements EvidenceService {
     @Override
     public EvidenceDto getById(UUID id) {
         log.debug("getById()...");
-        return evidenceMapper.diseaseEntityToDiseaseDto(
+        return evidenceMapper.evidendeEntityToEvidendeDto(
                 evidenceRepository.findById(id)
                         .orElseThrow(() -> new EvidenceException(ErrorCodeMessages.EVIDENCE_NOT_FOUND, "")));
     }
 
     @Override
+    public EvidenceList getByPatientId(UUID patientId) {
+        log.debug("getByPatientId()...");
+        return EvidenceList
+                .builder()
+                .evidenceDtoList(evidenceMapper.evidendeEntityListToEvidendeDtoList(evidenceRepository.findByPatientId(patientId)))
+                .build();
+    }
+
+    @Override
     public void create(Evidence evidence) {
         log.debug("create()...");
-        evidenceMapper.diseaseEntityToDiseaseDto(
+        evidenceMapper.evidendeEntityToEvidendeDto(
                 evidenceRepository.save(
-                        evidenceMapper.diseaseDtoToDiseaseEntity(
+                        evidenceMapper.evidendeDtoToEvidendeEntity(
                                 EvidenceDto
                                         .builder()
                                         .patientId(evidence.getPatientId())
-                                        .name(evidence.getName())
+                                        .evidenceTypeId(evidence.getEvidenceTypeId())
+                                        .diseaseId(evidence.getDiseaseId())
                                         .observations(evidence.getObservations())
                                         .build())));
     }
@@ -64,7 +74,8 @@ public class EvidenceServiceImpl implements EvidenceService {
                 .orElseThrow(() -> new EvidenceException(ErrorCodeMessages.EVIDENCE_NOT_FOUND, ""));
 
         evidenceEntity.setPatientId(evidence.getPatientId());
-        evidenceEntity.setName(evidence.getName());
+        evidenceEntity.setEvidenceTypeId(evidence.getEvidenceTypeId());
+        evidenceEntity.setDiseaseId(evidence.getDiseaseId());
         evidenceEntity.setObservations(evidence.getObservations());
 
         evidenceRepository.save(evidenceEntity);

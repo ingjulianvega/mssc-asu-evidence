@@ -47,6 +47,18 @@ public interface EvidenceI {
             method = RequestMethod.GET)
     ResponseEntity<EvidenceDto> getById(@Parameter(in = ParameterIn.PATH, description = "The evidence id", required = true, schema = @Schema()) @NotNull @PathVariable("id") UUID id);
 
+    @Operation(summary = "Endpoint to get the list of evidences having the patientId", description = "Returns a list of evidence for a patient", tags = {"evidence"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The operation was successful.", content = @Content(schema = @Schema(implementation = EvidenceList.class))),
+
+            @ApiResponse(responseCode = "400", description = "400 - business error", content = @Content(schema = @Schema(implementation = ApiError.class))),
+
+            @ApiResponse(responseCode = "500", description = "500 - server error", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+    @RequestMapping(value = "/patient-id/{patient-id}",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<EvidenceList> getByPatientId(@Parameter(in = ParameterIn.PATH, description = "The patient id", required = true, schema = @Schema()) @NotNull @PathVariable("patient-id") UUID patientId);
+
     @Operation(summary = "Endpoint to create a evidence", description = "Creates a new evidence", tags = {"evidence"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "The operation was successful."),

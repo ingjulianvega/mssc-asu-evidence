@@ -10,9 +10,9 @@ import java.util.List;
 
 @Mapper(uses = DateMapper.class)
 public interface EvidenceMapper {
-    EvidenceDto diseaseEntityToDiseaseDto(EvidenceEntity evidenceEntity);
+    EvidenceDto evidendeEntityToEvidendeDto(EvidenceEntity evidenceEntity);
 
-    EvidenceEntity diseaseDtoToDiseaseEntity(EvidenceDto evidenceDto);
+    EvidenceEntity evidendeDtoToEvidendeEntity(EvidenceDto evidenceDto);
 
-    ArrayList<EvidenceDto> diseaseEntityListToDiseaseDtoList(List<EvidenceEntity> evidenceEntityList);
+    ArrayList<EvidenceDto> evidendeEntityListToEvidendeDtoList(List<EvidenceEntity> evidenceEntityList);
 }

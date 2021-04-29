@@ -12,9 +12,13 @@ public interface EvidenceService {
 
     EvidenceDto getById(UUID id);
 
+    EvidenceList getByPatientId(UUID patientId);
+
     void create(Evidence evidence);
 
     void updateById(UUID id, Evidence evidence);
 
     void deleteById(UUID id);
+
+
 }

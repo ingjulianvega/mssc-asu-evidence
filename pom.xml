@@ -11,7 +11,7 @@
 
     <groupId>ingjulianvega.ximic</groupId>
     <artifactId>mssc-asu-evidence</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>mssc-asu-evidence</name>
     <description>ASU evidence management microservice (antecedente)</description>
     <properties>
