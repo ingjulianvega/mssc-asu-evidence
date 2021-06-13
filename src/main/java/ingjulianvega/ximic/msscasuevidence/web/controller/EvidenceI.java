@@ -33,7 +33,7 @@ public interface EvidenceI {
     @RequestMapping(value = "/",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<EvidenceList> get();
+    ResponseEntity<EvidenceList> get(@Parameter(in = ParameterIn.QUERY, description = "The using of cache", required = true, schema = @Schema()) Boolean usingCache);
 
     @Operation(summary = "Endpoint to get the information of a evidence given the id", description = "Returns a evidence", tags = {"evidence"})
     @ApiResponses(value = {

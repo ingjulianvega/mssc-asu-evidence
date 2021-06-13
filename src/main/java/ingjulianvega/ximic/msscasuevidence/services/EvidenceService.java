@@ -8,7 +8,7 @@ import ingjulianvega.ximic.msscasuevidence.web.model.EvidenceList;
 import java.util.UUID;
 
 public interface EvidenceService {
-    EvidenceList get();
+    EvidenceList get(Boolean usingCache);
 
     EvidenceDto getById(UUID id);
 

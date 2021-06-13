@@ -21,8 +21,8 @@ public class EvidenceController implements EvidenceI {
     private final EvidenceService evidenceService;
 
     @Override
-    public ResponseEntity<EvidenceList> get() {
-        return new ResponseEntity<>(evidenceService.get(), HttpStatus.OK);
+    public ResponseEntity<EvidenceList> get(Boolean usingCache) {
+        return new ResponseEntity<>(evidenceService.get(usingCache), HttpStatus.OK);
     }
 
     @Override
