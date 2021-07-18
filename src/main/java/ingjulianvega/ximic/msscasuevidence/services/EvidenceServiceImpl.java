@@ -12,6 +12,7 @@ import ingjulianvega.ximic.msscasuevidence.web.model.EvidenceList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -40,7 +41,14 @@ public class EvidenceServiceImpl implements EvidenceService {
         log.debug("getById()...");
         return evidenceMapper.evidendeEntityToEvidendeDto(
                 evidenceRepository.findById(id)
-                        .orElseThrow(() -> new EvidenceException(ErrorCodeMessages.EVIDENCE_NOT_FOUND, "")));
+                        .orElseThrow(() -> EvidenceException
+                                .builder()
+                                .httpStatus(HttpStatus.BAD_REQUEST)
+                                .apiCode(ErrorCodeMessages.EVIDENCE_NOT_FOUND_API_CODE)
+                                .error(ErrorCodeMessages.EVIDENCE_NOT_FOUND_ERROR)
+                                .message(ErrorCodeMessages.EVIDENCE_NOT_FOUND_MESSAGE)
+                                .solution(ErrorCodeMessages.EVIDENCE_NOT_FOUND_SOLUTION)
+                                .build()));
     }
 
     @Override
@@ -71,7 +79,14 @@ public class EvidenceServiceImpl implements EvidenceService {
     public void updateById(UUID id, Evidence evidence) {
         log.debug("updateById...");
         EvidenceEntity evidenceEntity = evidenceRepository.findById(id)
-                .orElseThrow(() -> new EvidenceException(ErrorCodeMessages.EVIDENCE_NOT_FOUND, ""));
+                .orElseThrow(() -> EvidenceException
+                        .builder()
+                        .httpStatus(HttpStatus.BAD_REQUEST)
+                        .apiCode(ErrorCodeMessages.EVIDENCE_NOT_FOUND_API_CODE)
+                        .error(ErrorCodeMessages.EVIDENCE_NOT_FOUND_ERROR)
+                        .message(ErrorCodeMessages.EVIDENCE_NOT_FOUND_MESSAGE)
+                        .solution(ErrorCodeMessages.EVIDENCE_NOT_FOUND_SOLUTION)
+                        .build());
 
         evidenceEntity.setPatientId(evidence.getPatientId());
         evidenceEntity.setEvidenceTypeId(evidence.getEvidenceTypeId());
